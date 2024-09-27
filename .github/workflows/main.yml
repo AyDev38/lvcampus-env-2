@@ -45,5 +45,5 @@ jobs:
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "Succès des tests"
         body: "Tous les tests ont réussi."
-        to: "m.fanget@tkminnovation.io"
-        from: "github.action.groupe2@gmail.com"
+        to: "m.fanget@tkminnovation.io, contact@scalar-formation.fr"
+        from: "ci-notifications@example.com"
