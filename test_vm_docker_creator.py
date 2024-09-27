@@ -36,12 +36,22 @@ def mock_input(monkeypatch):
         return "1"  # Valeur par défaut pour tout autre input
     monkeypatch.setattr("builtins.input", mock_input_func)
 
-# Correction du test load_iso_path
+# Fonction utilitaire pour lire le chemin ISO depuis config.txt
+def get_iso_path_from_config():
+    """Lit le fichier config.txt pour obtenir le chemin ISO."""
+    try:
+        with open("config.txt", "r") as file:
+            iso_path = file.readline().strip()  # Lire la première ligne du fichier
+            return iso_path
+    except FileNotFoundError:
+        raise FileNotFoundError("Le fichier 'config.txt' est introuvable. Veuillez le créer avec un chemin ISO valide.")
+
+# Test pour load_iso_path en utilisant config.txt
 def test_load_iso_path_success(monkeypatch):
     """Teste si le chemin ISO est correctement lu depuis config.txt."""
-    mock_path = "C:/Users/aymer/Downloads/ubuntu-24.04.1-desktop-amd64.iso"
+    mock_path = get_iso_path_from_config()  # On utilise la fonction pour obtenir le chemin ISO
     
-    # Utilise StringIO pour simuler un fichier lisible
+    # Simuler l'ouverture du fichier config.txt avec le chemin ISO
     def mock_open(*args, **kwargs):
         return io.StringIO(mock_path)
     
@@ -57,10 +67,10 @@ def test_load_iso_path_file_not_found(monkeypatch):
         iso_path = load_iso_path()
         assert iso_path is None
 
-# Tests pour la fonction create_vm
+# Tests pour create_vm en utilisant le chemin ISO depuis config.txt
 def test_create_vm_success(mock_subprocess_run_success, mock_os_path_isfile):
     """Test si la VM est créée avec succès."""
-    iso_path = "C:/Users/aymer/Downloads/ubuntu-24.04.1-desktop-amd64.iso"
+    iso_path = get_iso_path_from_config()  # On utilise la fonction pour obtenir le chemin ISO
     create_vm(iso_path)
     # Si aucune exception n'est levée, on considère que la VM est créée avec succès
 
@@ -73,11 +83,11 @@ def test_create_vm_invalid_iso(monkeypatch):
 
 def test_create_vm_failure(mock_subprocess_run_failure, mock_os_path_isfile):
     """Test si une erreur se produit lors de la création de la VM."""
-    iso_path = "C:/Users/aymer/Downloads/ubuntu-24.04.1-desktop-amd64.iso"
+    iso_path = get_iso_path_from_config()  # On utilise la fonction pour obtenir le chemin ISO
     create_vm(iso_path)
     # Si une exception subprocess.CalledProcessError est capturée, l'échec est simulé
 
-# Correction du test create_docker_container
+# Test pour create_docker_container
 def test_create_docker_container_success(mock_subprocess_run_success, mock_input):
     """Test si le conteneur Docker est créé avec succès."""
     create_docker_container()
