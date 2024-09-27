@@ -39,7 +39,7 @@ Le projet inclut également :
 ### **Comment utiliser ce projet :**
 1. Clonez ce dépôt :
    ```bash
-   git clone https://github.com/votre-depot/lvcampus-env-N°GROUPE.git
+   git clone https://github.com/votre-depot/lvcampus-env-2.git
    ```
 
 2. Installez les dépendances :
