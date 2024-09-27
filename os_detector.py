@@ -24,7 +24,3 @@ def detect_os():
     else:
         print(Fore.RED + f"Unsupported Operating System: {os_name}")
         return None
-
-
-if __name__ == "__main__":
-    detect_os()
