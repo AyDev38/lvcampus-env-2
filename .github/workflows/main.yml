@@ -29,36 +29,21 @@ jobs:
     - name: Run tests
       run: |
         pytest
-      id: pytest
+      id: pytest  # ID to reference the result later
 
   send_email:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - name: Send email if tests fail
-      if: failure()
-      run: |
-        curl --request POST \
-          --url https://api.sendgrid.com/v3/mail/send \
-          --header "Authorization: Bearer ${{ secrets.SENDGRID_PASSWORD }}" \
-          --header 'Content-Type: application/json' \
-          --data '{
-            "personalizations": [{"to": [{"email": "matthieu.fanget1@gmail.com"}]}],
-            "from": {"email": "github.action.groupe2@gmail.com"},
-            "subject": "Échec des tests",
-            "content": [{"type": "text/plain", "value": "Les tests ont échoué."}]
-          }'
-
     - name: Send success email if tests succeed
       if: success()
-      run: |
-        curl --request POST \
-          --url https://api.sendgrid.com/v3/mail/send \
-          --header "Authorization: Bearer ${{ secrets.SENDGRID_PASSWORD }}" \
-          --header 'Content-Type: application/json' \
-          --data '{
-            "personalizations": [{"to": [{"email": "matthieu.fanget1@gmail.com"}]}],
-            "from": {"email": "github.action.groupe2@gmail.com"},
-            "subject": "Succès des tests",
-            "content": [{"type": "text/plain", "value": "Tous les tests ont réussi."}]
-          }'
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com  # Change to your SMTP server if necessary
+        server_port: 465
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "Succès des tests"
+        body: "Tous les tests ont réussi."
+        to: "m.fanget@tkminnovation.io"
+        from: "github.action.groupe2@gmail.com"
