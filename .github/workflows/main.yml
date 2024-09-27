@@ -43,7 +43,7 @@ jobs:
           --header "Authorization: Bearer ${{ secrets.SENDGRID_PASSWORD }}" \
           --header 'Content-Type: application/json' \
           --data '{
-            "personalizations": [{"to": [{"email": "m.fanget@tkminnovation.io"}]}],
+            "personalizations": [{"to": [{"email": "matthieu.fanget1@gmail.com"}]}],
             "from": {"email": "github.action.groupe2@gmail.com"},
             "subject": "Échec des tests",
             "content": [{"type": "text/plain", "value": "Les tests ont échoué."}]
@@ -57,7 +57,7 @@ jobs:
           --header "Authorization: Bearer ${{ secrets.SENDGRID_PASSWORD }}" \
           --header 'Content-Type: application/json' \
           --data '{
-            "personalizations": [{"to": [{"email": "m.fanget@tkminnovation.io"}]}],
+            "personalizations": [{"to": [{"email": "matthieu.fanget1@gmail.com"}]}],
             "from": {"email": "github.action.groupe2@gmail.com"},
             "subject": "Succès des tests",
             "content": [{"type": "text/plain", "value": "Tous les tests ont réussi."}]
