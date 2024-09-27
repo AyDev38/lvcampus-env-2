@@ -44,7 +44,7 @@ jobs:
           --header 'Content-Type: application/json' \
           --data '{
             "personalizations": [{"to": [{"email": "m.fanget@tkminnovation.io"}]}],
-            "from": {"email": "github-actions@example.com"},
+            "from": {"email": "github.action.groupe2@gmail.com"},
             "subject": "Échec des tests",
             "content": [{"type": "text/plain", "value": "Les tests ont échoué."}]
           }'
@@ -58,7 +58,7 @@ jobs:
           --header 'Content-Type: application/json' \
           --data '{
             "personalizations": [{"to": [{"email": "m.fanget@tkminnovation.io"}]}],
-            "from": {"email": "github-actions@example.com"},
+            "from": {"email": "github.action.groupe2@gmail.com"},
             "subject": "Succès des tests",
             "content": [{"type": "text/plain", "value": "Tous les tests ont réussi."}]
           }'
