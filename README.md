@@ -1,6 +1,3 @@
-Voici un exemple de fichier `README.md` pour ton dépôt :
-
-```markdown
 # ![LiveCampus](https://cdn.prod.website-files.com/66153b9f3cb891501ecbf3e3/66154208e9b332c598edfd0e_logo-lc.png)
 
 ## MDV P25 - Projet d'Automatisation
@@ -68,10 +65,3 @@ Le projet inclut également :
 - [Télécharger VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - [Télécharger Docker](https://docs.docker.com/get-docker/)
 
----
-
-### **Contact :**
-Si vous avez des questions ou des suggestions, n'hésitez pas à contacter l'équipe de développement.
-```
-
-Cet exemple présente le projet de manière claire et concise, avec les informations essentielles pour l'utilisation et la contribution au projet. Assure-toi de remplacer le lien du logo avec l'URL correcte.
