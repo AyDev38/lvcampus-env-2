@@ -1,1 +1,1 @@
-C:/path/to/your/ubuntu.iso
+C:/Users/aymer/Downloads/ubuntu-24.04.1-desktop-amd64.iso
