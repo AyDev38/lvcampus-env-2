@@ -21,7 +21,7 @@ Ce projet a pour objectif de développer un script Python capable d'automatiser 
 Le projet inclut également :
 - L'utilisation de **tests unitaires** (via `pytest`) pour chaque fonction développée.
 - L'intégration d'un **workflow GitHub Actions** permettant l'exécution automatique des tests à chaque push.
-- La **notification par email** à l'équipe de développement et à l'intervenant après chaque push réussi ou échoué.
+- La **notification par email** à l'équipe de développement et à l'intervenant après chaque push et que les tests ont réussi. **Attention les mails peuvent arriver dans les SPAMS.**
 
 ---
 
@@ -57,7 +57,6 @@ Le projet inclut également :
    pytest
    ```
    
-
 5. Pour plus de détails sur les fonctionnalités, référez-vous à la documentation du projet.
 
 ---
