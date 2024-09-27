@@ -25,6 +25,34 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
     - name: Run tests
       run: |
         pytest
+      id: pytest
+
+  send_email:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send email
+      if: failure()
+      run: |
+        echo "Les tests ont échoué." | mail -s "Échec des tests" m.fanget@tkminnovation.io
+      env:
+        MAIL_FROM: "github-actions@example.com"
+        MAIL_TO: "m.fanget@tkminnovation.io"
+        SMTP_SERVER: "smtp.sendgrid.net"
+        SMTP_LOGIN: ${{ secrets.SMTP_LOGIN }}
+        SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+
+    - name: Send success email
+      if: success()
+      run: |
+        echo "Tous les tests ont réussi." | mail -s "Succès des tests" m.fanget@tkminnovation.io
+      env:
+        MAIL_FROM: "github-actions@example.com"
+        MAIL_TO: "m.fanget@tkminnovation.io"
+        SMTP_SERVER: "smtp.sendgrid.net"
+        SMTP_LOGIN: ${{ secrets.SMTP_LOGIN }}
+        SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
