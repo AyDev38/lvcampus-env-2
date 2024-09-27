@@ -56,6 +56,7 @@ Le projet inclut également :
    ```bash
    pytest
    ```
+   
 
 5. Pour plus de détails sur les fonctionnalités, référez-vous à la documentation du projet.
 
