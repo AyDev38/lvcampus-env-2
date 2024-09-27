@@ -35,24 +35,30 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - name: Send email
+    - name: Send email if tests fail
       if: failure()
       run: |
-        echo "Les tests ont échoué." | mail -s "Échec des tests" m.fanget@tkminnovation.io
-      env:
-        MAIL_FROM: "github-actions@example.com"
-        MAIL_TO: "m.fanget@tkminnovation.io"
-        SMTP_SERVER: "smtp.sendgrid.net"
-        SMTP_LOGIN: ${{ secrets.SMTP_LOGIN }}
-        SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        curl --request POST \
+          --url https://api.sendgrid.com/v3/mail/send \
+          --header "Authorization: Bearer ${{ secrets.SENDGRID_PASSWORD }}" \
+          --header 'Content-Type: application/json' \
+          --data '{
+            "personalizations": [{"to": [{"email": "m.fanget@tkminnovation.io"}]}],
+            "from": {"email": "github-actions@example.com"},
+            "subject": "Échec des tests",
+            "content": [{"type": "text/plain", "value": "Les tests ont échoué."}]
+          }'
 
-    - name: Send success email
+    - name: Send success email if tests succeed
       if: success()
       run: |
-        echo "Tous les tests ont réussi." | mail -s "Succès des tests" m.fanget@tkminnovation.io
-      env:
-        MAIL_FROM: "github-actions@example.com"
-        MAIL_TO: "m.fanget@tkminnovation.io"
-        SMTP_SERVER: "smtp.sendgrid.net"
-        SMTP_LOGIN: ${{ secrets.SMTP_LOGIN }}
-        SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        curl --request POST \
+          --url https://api.sendgrid.com/v3/mail/send \
+          --header "Authorization: Bearer ${{ secrets.SENDGRID_PASSWORD }}" \
+          --header 'Content-Type: application/json' \
+          --data '{
+            "personalizations": [{"to": [{"email": "m.fanget@tkminnovation.io"}]}],
+            "from": {"email": "github-actions@example.com"},
+            "subject": "Succès des tests",
+            "content": [{"type": "text/plain", "value": "Tous les tests ont réussi."}]
+          }'
